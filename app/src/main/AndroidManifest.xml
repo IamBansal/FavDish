@@ -14,14 +14,20 @@
         android:theme="@style/Theme.FavDish"
         tools:targetApi="31">
         <activity
+            android:name=".AddUpdateDish"
+            android:theme="@style/Theme.FavDish.NoActionBar"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:theme="@style/Theme.FavDish.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".Splash"
-            android:theme="@style/Theme.FavDish.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.FavDish.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

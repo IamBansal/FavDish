@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddUpdateDish">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/primary_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/dishImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/dish_image_bg"
+                    android:scaleType="fitXY"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/addDishImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:padding="16dp"
+                    app:srcCompat="@drawable/ic_add_a_photo" />
+
+            </FrameLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/titleLayout"
+                app:layout_constraintTop_toBottomOf="@id/frameLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                app:hintAnimationEnabled="true"
+                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Title"
+                app:hintTextColor="@color/black"
+                android:layout_height="wrap_content" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTitle"
+                    android:textColor="@color/black"
+                    android:inputType="text"
+                    android:textColorHint="@color/grey"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/typeLayout"
+                app:layout_constraintTop_toBottomOf="@id/titleLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                app:hintAnimationEnabled="true"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Type"
+                app:hintTextColor="@color/black"
+                android:layout_height="wrap_content" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etType"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:textColor="@color/black"
+                    android:inputType="text"
+                    android:textColorHint="@color/grey"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/categoryLayout"
+                app:layout_constraintTop_toBottomOf="@id/typeLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Category"
+                app:hintAnimationEnabled="true"
+                app:hintTextColor="@color/black"
+                android:layout_height="wrap_content" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCategory"
+                    android:textColor="@color/black"
+                    android:inputType="text"
+                    android:textColorHint="@color/grey"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngredientsLayout"
+                app:layout_constraintTop_toBottomOf="@id/categoryLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Ingredients"
+                app:hintAnimationEnabled="true"
+                app:hintTextColor="@color/black"
+                android:layout_height="wrap_content" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etIngredients"
+                    android:textColor="@color/black"
+                    android:inputType="text"
+                    android:gravity="top"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/CookingTimeLayout"
+                app:layout_constraintTop_toBottomOf="@id/IngredientsLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Cooking Time in Minutes"
+                app:hintAnimationEnabled="true"
+                app:hintTextColor="@color/black"
+                android:layout_height="wrap_content" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCookingTime"
+                    android:textColor="@color/black"
+                    android:inputType="text"
+                    android:gravity="top"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/DirectionLayout"
+                app:layout_constraintTop_toBottomOf="@id/CookingTimeLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Direction to Cook"
+                app:hintAnimationEnabled="true"
+                app:hintTextColor="@color/black"
+                android:layout_height="wrap_content" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDirection"
+                    android:textColor="@color/black"
+                    android:inputType="text"
+                    android:gravity="top"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnAddDish"
+                android:text="Add Dish"
+                android:textAllCaps="false"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/DirectionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

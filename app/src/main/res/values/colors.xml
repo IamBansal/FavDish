@@ -8,6 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="dish_image_bg">#E1E1E1</color>
+    <color name="blue_grey">#37474f</color>
+    <color name="grey">#212121</color>
+
     <color name="primary_color">#388E3C</color>
     <color name="primary_dark_color">#00600F</color>
     <color name="primary_light_color">#6ABF69</color>
