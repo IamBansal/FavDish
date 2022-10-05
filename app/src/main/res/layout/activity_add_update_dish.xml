@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddUpdateDish">
+    tools:context=".view.activity.AddUpdateDish">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -131,6 +131,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCategory"
                     android:textColor="@color/black"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:inputType="text"
                     android:textColorHint="@color/grey"
                     android:textSize="15sp"
@@ -187,6 +189,8 @@
                     android:textColor="@color/black"
                     android:inputType="text"
                     android:gravity="top"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:textSize="15sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

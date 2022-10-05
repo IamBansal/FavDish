@@ -1,4 +1,4 @@
-package com.example.favdish
+package com.example.favdish.view.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.favdish.R
 import com.example.favdish.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

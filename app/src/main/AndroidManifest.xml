@@ -20,15 +20,15 @@
         android:theme="@style/Theme.FavDish"
         tools:targetApi="31">
         <activity
-            android:name=".AddUpdateDish"
+            android:name=".view.activity.AddUpdateDish"
             android:theme="@style/Theme.FavDish.NoActionBar"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activity.MainActivity"
             android:theme="@style/Theme.FavDish.NoActionBar"
             android:exported="false" />
         <activity
-            android:name=".Splash"
+            android:name=".view.activity.Splash"
             android:exported="true"
             android:theme="@style/Theme.FavDish.NoActionBar">
             <intent-filter>
