@@ -63,9 +63,7 @@ class AddUpdateDish : AppCompatActivity(), View.OnClickListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
                     report?.let {
                         if (report.areAllPermissionsGranted()) {
-                            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                            startActivityForResult(intent, CAMERA)
-
+                            startActivityForResult(Intent(MediaStore.ACTION_IMAGE_CAPTURE), CAMERA)
                         }
                     }
                 }
@@ -86,7 +84,12 @@ class AddUpdateDish : AppCompatActivity(), View.OnClickListener {
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ).withListener(object : PermissionListener {
                 override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                    Toast.makeText(this@AddUpdateDish, "Gallery Allowed", Toast.LENGTH_SHORT).show()
+                    startActivityForResult(
+                        Intent(
+                            Intent.ACTION_PICK,
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                        ), GALLERY
+                    )
                 }
 
                 override fun onPermissionDenied(response: PermissionDeniedResponse?) {
@@ -154,12 +157,27 @@ class AddUpdateDish : AppCompatActivity(), View.OnClickListener {
                         )
                     )
                 }
+            } else if (requestCode == GALLERY) {
+                data?.let {
+                    val selectedPhotoUri = data.data
+                    binding.dishImage.setImageURI(selectedPhotoUri)
+                    binding.addDishImage.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this,
+                            R.drawable.ic_baseline_edit_24
+                        )
+                    )
+                }
             }
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(this@AddUpdateDish, "Image selection cancelled.", Toast.LENGTH_SHORT)
+                .show()
         }
 
     }
 
     companion object {
         private const val CAMERA = 1
+        private const val GALLERY = 2
     }
 }
