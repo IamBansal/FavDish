@@ -18,6 +18,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,11 +29,15 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.favdish.R
+import com.example.favdish.application.FavDishApplication
 import com.example.favdish.databinding.ActivityAddUpdateDishBinding
 import com.example.favdish.databinding.DialogCustomImageSelectionBinding
 import com.example.favdish.databinding.DialogCustomListBinding
+import com.example.favdish.model.entity.FavDish
 import com.example.favdish.utils.Constants
 import com.example.favdish.view.adapters.ListItemAdapter
+import com.example.favdish.viewModel.FavDishViewModel
+import com.example.favdish.viewModel.FavDishViewModelFactory
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -52,6 +57,10 @@ class AddUpdateDish : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityAddUpdateDishBinding
     private var imagePath: String = ""
     private lateinit var mCustomListDialog: Dialog
+
+    private val favDishViewModel : FavDishViewModel by viewModels{
+        FavDishViewModelFactory((application as FavDishApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -294,11 +303,24 @@ class AddUpdateDish : AppCompatActivity(), View.OnClickListener {
                             ).show()
                         }
                         else -> {
+                            val favDishDetails : FavDish = FavDish(
+                                imagePath,
+                                Constants.DISH_IMAGE_SOURCE_LOCAL,
+                                title,
+                                type,
+                                category,
+                                ingredients,
+                                cookingTime,
+                                cookingDirection,
+                                false
+                            )
+                            favDishViewModel.insert(favDishDetails)
                             Toast.makeText(
                                 this@AddUpdateDish,
                                 "Getting your dish ready.....",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            finish()
                         }
                     }
 
