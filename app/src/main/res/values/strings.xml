@@ -6,4 +6,5 @@
     <string name="custom_image_selection">Custom Image Selection</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+    <string name="no_dishes_added_yet">No dishes added yet</string>
 </resources>

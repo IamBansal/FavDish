@@ -4,40 +4,55 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.favdish.application.FavDishApplication
 import com.example.favdish.databinding.FragmentHomeBinding
-import com.example.favdish.viewModel.HomeViewModel
+import com.example.favdish.view.adapters.FavDishAdapter
+import com.example.favdish.viewModel.FavDishViewModel
+import com.example.favdish.viewModel.FavDishViewModelFactory
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private lateinit var binding: FragmentHomeBinding
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private val favDishViewModel: FavDishViewModel by viewModels {
+        FavDishViewModelFactory((requireActivity().application as FavDishApplication).repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.rvDishesList.layoutManager = GridLayoutManager(requireActivity(), 2)
+        val favDishAdapter = FavDishAdapter(this@HomeFragment)
+
+        binding.rvDishesList.adapter = favDishAdapter
+
+        favDishViewModel.allDishesList.observe(viewLifecycleOwner) { dishes ->
+            dishes.let {
+                if (it.isNotEmpty()) {
+                    binding.rvDishesList.visibility = View.VISIBLE
+                    binding.tvNoDishesAdded.visibility = View.GONE
+
+                    favDishAdapter.dishesList(it)
+                } else {
+                    binding.rvDishesList.visibility = View.GONE
+                    binding.tvNoDishesAdded.visibility = View.VISIBLE
+                }
+            }
+
+        }
     }
 }

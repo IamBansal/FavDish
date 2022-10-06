@@ -303,7 +303,7 @@ class AddUpdateDish : AppCompatActivity(), View.OnClickListener {
                             ).show()
                         }
                         else -> {
-                            val favDishDetails : FavDish = FavDish(
+                            val favDishDetails = FavDish(
                                 imagePath,
                                 Constants.DISH_IMAGE_SOURCE_LOCAL,
                                 title,
