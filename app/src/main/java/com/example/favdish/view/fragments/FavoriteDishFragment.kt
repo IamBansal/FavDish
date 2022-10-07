@@ -4,40 +4,78 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.favdish.application.FavDishApplication
 import com.example.favdish.databinding.FragmentFavoriteDishBinding
-import com.example.favdish.viewModel.FavoriteDishViewModel
+import com.example.favdish.model.entity.FavDish
+import com.example.favdish.view.activity.MainActivity
+import com.example.favdish.view.adapters.FavDishAdapter
+import com.example.favdish.viewModel.FavDishViewModel
+import com.example.favdish.viewModel.FavDishViewModelFactory
 
 class FavoriteDishFragment : Fragment() {
 
-    private var _binding: FragmentFavoriteDishBinding? = null
+    private lateinit var binding: FragmentFavoriteDishBinding
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private val favDishViewModel: FavDishViewModel by viewModels {
+        FavDishViewModelFactory((requireActivity().application as FavDishApplication).repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(FavoriteDishViewModel::class.java)
 
-        _binding = FragmentFavoriteDishBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        binding = FragmentFavoriteDishBinding.inflate(inflater, container, false)
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.rvFavDishesList.layoutManager = GridLayoutManager(requireActivity(), 2)
+        val favDishAdapter = FavDishAdapter(this@FavoriteDishFragment)
+
+        binding.rvFavDishesList.adapter = favDishAdapter
+
+        favDishViewModel.favDishesList.observe(viewLifecycleOwner) { dishes ->
+            dishes.let {
+                if (it.isNotEmpty()) {
+                    binding.rvFavDishesList.visibility = View.VISIBLE
+                    binding.tvNoDishesAdded.visibility = View.GONE
+
+                    favDishAdapter.dishesList(it)
+                } else {
+                    binding.rvFavDishesList.visibility = View.GONE
+                    binding.tvNoDishesAdded.visibility = View.VISIBLE
+                }
+            }
+
         }
-        return root
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onResume() {
+        super.onResume()
+        //To show bottom navigation view when all dishes is open
+        if (requireActivity() is MainActivity){
+            (activity as MainActivity?)!!.showBottomNavView()
+        }
     }
+
+    fun dishDetails(favDish: FavDish){
+        findNavController().navigate(FavoriteDishFragmentDirections.actionNavigationFavoriteDishesToNavigationDishDetail(favDish))
+
+        //To hide bottom navigation view when dish details is open
+        if (requireActivity() is MainActivity){
+            (activity as MainActivity?)!!.hideBottomNavView()
+        }
+
+    }
+
 }
