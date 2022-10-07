@@ -11,14 +11,14 @@ object Constants {
 
     fun dishTypes(): ArrayList<String>{
         val list = ArrayList<String>()
-        list.add("breakfast")
-        list.add("lunch")
-        list.add("snacks")
-        list.add("dinner")
-        list.add("brunch")
-        list.add("salad")
-        list.add("dessert")
-        list.add("other")
+        list.add("Breakfast")
+        list.add("Lunch")
+        list.add("Snacks")
+        list.add("Dinner")
+        list.add("Brunch")
+        list.add("Salad")
+        list.add("Dessert")
+        list.add("Other")
         return list
     }
 
@@ -29,9 +29,9 @@ object Constants {
         list.add("Burger")
         list.add("Coffee")
         list.add("Sandwich")
-        list.add("salad")
-        list.add("dessert")
-        list.add("other")
+        list.add("Salad")
+        list.add("Dessert")
+        list.add("Other")
         return list
     }
 

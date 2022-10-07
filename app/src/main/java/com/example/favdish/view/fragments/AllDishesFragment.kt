@@ -1,14 +1,21 @@
 package com.example.favdish.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.favdish.R
 import com.example.favdish.application.FavDishApplication
 import com.example.favdish.databinding.FragmentAllDishesBinding
+import com.example.favdish.model.entity.FavDish
+import com.example.favdish.view.activity.AddUpdateDish
+import com.example.favdish.view.activity.MainActivity
 import com.example.favdish.view.adapters.FavDishAdapter
 import com.example.favdish.viewModel.FavDishViewModel
 import com.example.favdish.viewModel.FavDishViewModelFactory
@@ -27,7 +34,6 @@ class AllDishesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAllDishesBinding.inflate(inflater, container, false)
-
 
         return binding.root
     }
@@ -54,5 +60,43 @@ class AllDishesFragment : Fragment() {
             }
 
         }
+
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.home_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Handle the menu selection
+                return when (menuItem.itemId) {
+                    R.id.toAddUpdateDish -> {
+                        startActivity(Intent(requireActivity(), AddUpdateDish::class.java))
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //To show bottom navigation view when all dishes is open
+        if (requireActivity() is MainActivity){
+            (activity as MainActivity?)!!.showBottomNavView()
+        }
+    }
+
+    fun dishDetails(favDish: FavDish){
+        findNavController().navigate(AllDishesFragmentDirections.actionNavigationAllDishesToNavigationDishDetail(favDish))
+
+        //To hide bottom navigation view when dish details is open
+        if (requireActivity() is MainActivity){
+            (activity as MainActivity?)!!.hideBottomNavView()
+        }
+
     }
 }

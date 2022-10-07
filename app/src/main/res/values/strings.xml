@@ -10,4 +10,6 @@
     <string name="title_random_dishes">Random Dishes</string>
     <string name="title_favorite_dishes">Favorite Dishes</string>
     <string name="title_all_dishes">All Dishes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
