@@ -11,12 +11,15 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -67,6 +70,7 @@ class AddUpdateDish : AppCompatActivity(), View.OnClickListener {
         binding = ActivityAddUpdateDishBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        hideStatusBar()
         setUpActionBar()
         binding.addDishImage.setOnClickListener(this)
         binding.etType.setOnClickListener(this)
@@ -164,6 +168,18 @@ class AddUpdateDish : AppCompatActivity(), View.OnClickListener {
                 mCustomListDialog.dismiss()
                 binding.etCookingTime.setText(item)
             }
+        }
+    }
+
+    private fun hideStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            @Suppress("DEPRECATION")
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
         }
     }
 
@@ -337,7 +353,7 @@ class AddUpdateDish : AppCompatActivity(), View.OnClickListener {
                 data?.extras?.let {
                     val thumbnail: Bitmap = it.get("data") as Bitmap
 
-                    Glide.with(this).load(thumbnail).into(binding.dishImage)
+                    Glide.with(this).load(thumbnail).centerCrop().into(binding.dishImage)
                     imagePath = saveImageToInternalStorage(thumbnail)
 
                     Glide.with(this).load(R.drawable.ic_baseline_edit_24).into(binding.addDishImage)
@@ -349,6 +365,7 @@ class AddUpdateDish : AppCompatActivity(), View.OnClickListener {
 
                     Glide.with(this)
                         .load(selectedPhotoUri)
+                        .centerCrop()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
