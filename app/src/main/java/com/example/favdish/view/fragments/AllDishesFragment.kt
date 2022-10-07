@@ -8,14 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.favdish.application.FavDishApplication
-import com.example.favdish.databinding.FragmentHomeBinding
+import com.example.favdish.databinding.FragmentAllDishesBinding
 import com.example.favdish.view.adapters.FavDishAdapter
 import com.example.favdish.viewModel.FavDishViewModel
 import com.example.favdish.viewModel.FavDishViewModelFactory
 
-class HomeFragment : Fragment() {
+class AllDishesFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentAllDishesBinding
 
     private val favDishViewModel: FavDishViewModel by viewModels {
         FavDishViewModelFactory((requireActivity().application as FavDishApplication).repository)
@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentAllDishesBinding.inflate(inflater, container, false)
 
 
         return binding.root
@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvDishesList.layoutManager = GridLayoutManager(requireActivity(), 2)
-        val favDishAdapter = FavDishAdapter(this@HomeFragment)
+        val favDishAdapter = FavDishAdapter(this@AllDishesFragment)
 
         binding.rvDishesList.adapter = favDishAdapter
 
