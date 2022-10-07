@@ -1,6 +1,8 @@
 package com.example.favdish.view.activity
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -31,7 +33,9 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment_activity_main)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_all_dishes, R.id.navigation_favorite_dishes, R.id.navigation_random_dishes
+                R.id.navigation_all_dishes,
+                R.id.navigation_favorite_dishes,
+                R.id.navigation_random_dishes
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -42,16 +46,18 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navController, null)
     }
 
-    fun hideBottomNavView(){
+    fun hideBottomNavView() {
         binding.navView.clearAnimation()
-        binding.navView.visibility = View.GONE
         binding.navView.animate().translationY(binding.navView.height.toFloat()).duration = 300
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.navView.visibility = View.GONE
+        }, 400)
     }
 
-    fun showBottomNavView(){
+    fun showBottomNavView() {
         binding.navView.clearAnimation()
-        binding.navView.visibility = View.VISIBLE
         binding.navView.animate().translationY(0f).duration = 300
+        binding.navView.visibility = View.VISIBLE
     }
 
     private fun setUpActionBar() {
