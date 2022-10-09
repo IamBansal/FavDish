@@ -3,6 +3,7 @@ package com.example.favdish.view.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -88,6 +89,23 @@ class AllDishesFragment : Fragment() {
         if (requireActivity() is MainActivity){
             (activity as MainActivity?)!!.showBottomNavView()
         }
+    }
+
+    fun deleteDish(dish: FavDish){
+        val alertDialog = AlertDialog.Builder(requireActivity())
+        alertDialog.setTitle("Delete Dish????")
+            .setMessage("You sure you want to delete the ${dish.title}.\nYou won't be able to restore that.")
+            .setIcon(R.drawable.ic_baseline_delete_forever_24)
+            .setPositiveButton("Yes, Delete"){dialog,_->
+                favDishViewModel.delete(dish)
+                dialog.dismiss()
+            }
+            .setNegativeButton("No"){dialog,_->
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .create()
+            .show()
     }
 
     fun dishDetails(favDish: FavDish){

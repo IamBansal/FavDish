@@ -7,6 +7,7 @@
         <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.122" />
         <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.122" />
         <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/drawable/ic_fav_dish_selected.xml" value="0.118" />
+        <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/layout-v23/item_dish_layout.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/layout/activity_add_update_dish.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/layout/activity_splash.xml" value="0.23229166666666667" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/layout/item_custom_list.xml" value="0.23125" />
         <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/layout/item_dish_layout.xml" value="0.23125" />
         <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/menu/bottom_nav_menu.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/menu/dish_options_menu.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/abans/AndroidStudioProjects/FavDish/app/src/main/res/menu/home_menu.xml" value="0.18333333333333332" />
       </map>
     </option>
