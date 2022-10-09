@@ -52,35 +52,35 @@ class DishDetailsFragment : Fragment() {
                 Glide.with(requireActivity())
                     .load(it.dishDetails.image)
                     .centerCrop()
-                    .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: Target<Drawable>?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            return false
-                        }
-
-                        override fun onResourceReady(
-                            resource: Drawable?,
-                            model: Any?,
-                            target: Target<Drawable>?,
-                            dataSource: DataSource?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-
-                            Palette.from(resource!!.toBitmap()).generate { palette ->
-                                palette?.let {
-                                    val intColor = palette.vibrantSwatch?.rgb ?: 0
-                                    binding.clDishDetail.setBackgroundColor(intColor)
-                                }
-                            }
-
-                            return false
-                        }
-
-                    })
+//                    .listener(object : RequestListener<Drawable> {
+//                        override fun onLoadFailed(
+//                            e: GlideException?,
+//                            model: Any?,
+//                            target: Target<Drawable>?,
+//                            isFirstResource: Boolean
+//                        ): Boolean {
+//                            return false
+//                        }
+//
+//                        override fun onResourceReady(
+//                            resource: Drawable?,
+//                            model: Any?,
+//                            target: Target<Drawable>?,
+//                            dataSource: DataSource?,
+//                            isFirstResource: Boolean
+//                        ): Boolean {
+//
+//                            Palette.from(resource!!.toBitmap()).generate { palette ->
+//                                palette?.let {
+//                                    val intColor = palette.vibrantSwatch?.rgb ?: 0
+//                                    binding.clDishDetail.setBackgroundColor(intColor)
+//                                }
+//                            }
+//
+//                            return false
+//                        }
+//
+//                    })
                     .into(binding.ivDishDetail)
                 binding.tvTitleDishDetail.text = it.dishDetails.title
                 binding.tvTypeDishDetail.text = it.dishDetails.type

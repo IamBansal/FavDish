@@ -4,6 +4,14 @@
 
     <item
         android:title=""
+        android:id="@+id/filterDishes"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_baseline_filter_list_24"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:title=""
+        android:orderInCategory="101"
         android:id="@+id/toAddUpdateDish"
         android:icon="@drawable/ic_baseline_add_24"
         app:showAsAction="always" />
