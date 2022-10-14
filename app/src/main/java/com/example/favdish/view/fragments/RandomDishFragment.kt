@@ -1,6 +1,9 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.favdish.view.fragments
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -27,6 +30,7 @@ class RandomDishFragment : Fragment() {
 
     private lateinit var binding: FragmentRandomDishBinding
     private lateinit var randomDishesViewModel: RandomDishesViewModel
+    private lateinit var progressBar: ProgressDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +48,8 @@ class RandomDishFragment : Fragment() {
         randomDishesViewModel = ViewModelProvider(this)[RandomDishesViewModel::class.java]
 
         randomDishesViewModel.getRandomRecipeFromAPI()
+        progressBar = ProgressDialog(requireActivity())
+        progressBar.setMessage("Loading dish..")
 
         randomDishViewModelObserver()
 
@@ -149,6 +155,7 @@ class RandomDishFragment : Fragment() {
                     binding.srlRandomDish.isRefreshing = false
                 }
                 setRandomDishResponseInUI(randomDishResponse.recipes[0])
+                progressBar.dismiss()
             }
         }
 
@@ -166,7 +173,11 @@ class RandomDishFragment : Fragment() {
             viewLifecycleOwner
         ) { loadRandomDish ->
             loadRandomDish?.let {
-
+                if (loadRandomDish && !binding.srlRandomDish.isRefreshing){
+                    progressBar.show()
+                } else {
+                    progressBar.dismiss()
+                }
             }
         }
 
