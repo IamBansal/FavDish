@@ -1,33 +1,35 @@
 package com.example.favdish.view.fragments
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.text.Html
+import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
-import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.example.favdish.R
 import com.example.favdish.application.FavDishApplication
 import com.example.favdish.databinding.FragmentDishDetailsBinding
+import com.example.favdish.model.entity.FavDish
+import com.example.favdish.utils.Constants
 import com.example.favdish.viewModel.FavDishViewModel
 import com.example.favdish.viewModel.FavDishViewModelFactory
 import java.io.IOException
 
+@Suppress("DEPRECATION")
 class DishDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentDishDetailsBinding
+    private lateinit var favDishDetails: FavDish
+
     private val favDishViewModel: FavDishViewModel by viewModels {
         FavDishViewModelFactory(((requireActivity().application) as FavDishApplication).repository)
     }
@@ -45,8 +47,26 @@ class DishDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args: DishDetailsFragmentArgs by navArgs()
+        val menuHost: MenuHost = requireActivity()
 
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_share, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.shareDish -> {
+                        shareDish()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        val args: DishDetailsFragmentArgs by navArgs()
+        favDishDetails = args.dishDetails
         args.let {
             try {
                 Glide.with(requireActivity())
@@ -132,8 +152,47 @@ class DishDetailsFragment : Fragment() {
                     )
                 )
                 Toast.makeText(requireActivity(), "Un-favorite", Toast.LENGTH_SHORT).show()
-                }
+            }
         }
+
+    }
+
+    private fun shareDish() {
+
+        val type = "text/plain"
+        val subject = "Checkout this dish"
+        var extraText: String
+        val shareWith = "Share with"
+
+        favDishDetails.let {
+            var image = ""
+            if (it.imageSource == Constants.DISH_IMAGE_SOURCE_ONLINE) {
+                image = it.image
+            }
+
+            val cookingInstructions: String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(
+                    it.directionToCook, Html.FROM_HTML_MODE_COMPACT
+                ).toString()
+            } else {
+                Html.fromHtml(it.directionToCook).toString()
+            }
+
+            extraText =
+                "$image \n" +
+                        "\nTitle: ${it.title} \n" +
+                        "\nType: ${it.type} \n" +
+                        "\nCategory: ${it.category} \n" +
+                        "\nIngredients: \n${it.ingredients} \n" +
+                        "\nInstructions to cook: \n$cookingInstructions \n" +
+                        "\nTime required to cook the dish approx ${it.cookingTime} minutes."
+
+        }
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = type
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        intent.putExtra(Intent.EXTRA_TEXT, extraText)
+        startActivity(Intent.createChooser(intent, shareWith))
 
     }
 
