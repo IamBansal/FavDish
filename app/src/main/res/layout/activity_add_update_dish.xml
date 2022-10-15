@@ -74,7 +74,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etTitle"
-                    android:textColor="@color/black"
+                    android:textColor="?android:textColorPrimary"
                     android:inputType="text"
                     android:textColorHint="@color/grey"
                     android:textSize="15sp"
@@ -103,7 +103,7 @@
                     android:id="@+id/etType"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:textColor="@color/black"
+                    android:textColor="?android:textColorPrimary"
                     android:inputType="text"
                     android:textColorHint="@color/grey"
                     android:textSize="15sp"
@@ -130,7 +130,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCategory"
-                    android:textColor="@color/black"
+                    android:textColor="?android:textColorPrimary"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:inputType="text"
@@ -159,7 +159,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etIngredients"
-                    android:textColor="@color/black"
+                    android:textColor="?android:textColorPrimary"
                     android:inputType="textMultiLine"
                     android:gravity="top"
                     android:maxLines="5"
@@ -187,7 +187,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCookingTime"
-                    android:textColor="@color/black"
+                    android:textColor="?android:textColorPrimary"
                     android:inputType="text"
                     android:gravity="top"
                     android:focusable="false"
@@ -216,7 +216,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDirection"
-                    android:textColor="@color/black"
+                    android:textColor="?android:textColorPrimary"
                     android:inputType="textMultiLine"
                     android:gravity="top"
                     android:textSize="15sp"
@@ -230,6 +230,7 @@
                 android:text="Add Dish"
                 tools:ignore="HardcodedText"
                 android:textAllCaps="false"
+                android:textColor="?android:textColorPrimary"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"

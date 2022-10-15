@@ -121,7 +121,7 @@ class DishDetailsFragment : Fragment() {
                     binding.ivDishFav.setImageDrawable(
                         ContextCompat.getDrawable(
                             requireActivity(),
-                            R.drawable.ic_fav_dish
+                            R.drawable.ic_favdish_unselected
                         )
                     )
                 }
@@ -148,7 +148,7 @@ class DishDetailsFragment : Fragment() {
                 binding.ivDishFav.setImageDrawable(
                     ContextCompat.getDrawable(
                         requireActivity(),
-                        R.drawable.ic_fav_dish
+                        R.drawable.ic_favdish_unselected
                     )
                 )
                 Toast.makeText(requireActivity(), "Un-favorite", Toast.LENGTH_SHORT).show()

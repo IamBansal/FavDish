@@ -97,16 +97,16 @@ class RandomDishFragment : Fragment() {
             binding.tvDirectionDishDetail.text = Html.fromHtml(recipe.instructions)
         }
 
+        binding.tvTimeDishDetail.text = "Time required to cook the dish approx ${recipe.readyInMinutes} minutes."
+
         binding.ivDishFav.setImageDrawable(
             ContextCompat.getDrawable(
                 requireActivity(),
-                R.drawable.ic_fav_dish
+                R.drawable.ic_favdish_unselected
             )
         )
 
         var addedToFavorites = false
-
-        binding.tvTimeDishDetail.text = recipe.cookingMinutes.toString()
 
         binding.ivDishFav.setOnClickListener {
 
@@ -139,7 +139,7 @@ class RandomDishFragment : Fragment() {
                         R.drawable.ic_fav_dish_selected
                     )
                 )
-                Toast.makeText(requireActivity(), "Fav", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Added to favorites", Toast.LENGTH_SHORT).show()
             }
         }
 
